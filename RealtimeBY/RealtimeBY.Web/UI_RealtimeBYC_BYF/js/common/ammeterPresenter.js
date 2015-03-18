@@ -1,15 +1,16 @@
-﻿var dataProviderUrl = "ElectricRoomCementMill.aspx/GetValues";
+﻿var dataProviderUrl = "AmmeterMonitor.aspx/GetValues";
 var pollingIntervals = 300000;
 var pollforupdates = true;
 var pollingTimer;
+var mOrganizationId = '';
+//$(document).ready(function () {
+//    // 文档加载完毕后开始获取最新数据
+//    getLatestData();
+//});
 
-$(document).ready(function () {
-    // 文档加载完毕后开始获取最新数据
-    getLatestData();
-});
-
-function getLatestData() {
+function getLatestData(organizationId) {
     // 发送 asynchronous POST 请求获取最新数据
+    mOrganizationId = organizationId;
     dto = '';
     varType = "POST";
     varContentType = "application/json; charset=utf-8";
@@ -21,6 +22,7 @@ function getLatestData() {
     $.ajax({
         type: varType,                  // GET or POST or PUT or DELETE verb
         url: dataProviderUrl,           // location of the service
+        data: '{organizationId:"' + organizationId + '"}',
         //data: varData,                  // data sent to server
         contentType: varContentType,    // content type sent to server
         dataType: varDataType,          // expected data format from server
@@ -42,7 +44,7 @@ function setupTimerToPollLatestData() {
     // 设置获取最新数据定时器
     pollingTimer = setTimeout(
         function () {
-            getLatestData();
+            getLatestData(mOrganizationId);
         }, pollingIntervals);
 }
 

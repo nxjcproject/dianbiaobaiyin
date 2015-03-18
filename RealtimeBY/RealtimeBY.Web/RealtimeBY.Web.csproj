@@ -61,6 +61,19 @@
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="WebStyleBaseForEnergy, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\WebStyleBaseForEnergy.dll</HintPath>
+    </Reference>
+    <Reference Include="WebUserContorls.Web">
+      <HintPath>..\Lib\WebUserContorls.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="WebUserControls.Infrastructure">
+      <HintPath>..\Lib\WebUserControls.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="WebUserControls.Service">
+      <HintPath>..\Lib\WebUserControls.Service.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="lib\ealib\changelog.txt" />
@@ -1569,19 +1582,9 @@
     <Content Include="lib\pllib\themes\jquery.jqplot.css" />
     <Content Include="lib\pllib\themes\jquery.jqplot.min.css" />
     <Content Include="Test.aspx" />
-    <Content Include="UI_RealtimeBYC_BYF\ElectricRoomCementMill.aspx" />
-    <Content Include="UI_RealtimeBYC_BYF\ElectricRoomMine.aspx" />
-    <Content Include="UI_RealtimeBYC_BYF\ElectricRoomCementMix.aspx" />
-    <Content Include="UI_RealtimeBYC_BYF\ElectricRoomCoalMill.aspx" />
-    <Content Include="UI_RealtimeBYC_BYF\ElectricRoomKilnTail.aspx" />
-    <Content Include="UI_RealtimeBYC_BYF\ElectricRoomPackaging.aspx" />
-    <Content Include="UI_RealtimeBYC_BYF\ElectricRoomPowerGeneration.aspx" />
-    <Content Include="UI_RealtimeBYC_BYF\ElectricRoomRawMaterialMill.aspx" />
-    <Content Include="UI_RealtimeBYC_BYF\ElectricRoomRawMaterialMix.aspx" />
+    <Content Include="UI_RealtimeBYC_BYF\AmmeterMonitor.aspx" />
+    <Content Include="UI_RealtimeBYC_BYF\js\common\AmmeterMonitor.js" />
     <Content Include="UI_RealtimeBYC_BYF\js\common\ammeterPresenter.js" />
-    <Content Include="UI_RealtimeBYC_BYF\Others.aspx" />
-    <Content Include="UI_RealtimeBYC_BYF\SubstationKilnHead.aspx" />
-    <Content Include="UI_RealtimeBYC_BYF\SubstationTotalStepdown.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -1593,89 +1596,12 @@
     <Compile Include="Test.aspx.designer.cs">
       <DependentUpon>Test.aspx</DependentUpon>
     </Compile>
-    <Compile Include="UI_RealtimeBYC_BYF\ElectricRoomCementMill.aspx.cs">
-      <DependentUpon>ElectricRoomCementMill.aspx</DependentUpon>
+    <Compile Include="UI_RealtimeBYC_BYF\AmmeterMonitor.aspx.cs">
+      <DependentUpon>AmmeterMonitor.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="UI_RealtimeBYC_BYF\ElectricRoomCementMill.aspx.designer.cs">
-      <DependentUpon>ElectricRoomCementMill.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="UI_RealtimeBYC_BYF\ElectricRoomMine.aspx.cs">
-      <DependentUpon>ElectricRoomMine.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="UI_RealtimeBYC_BYF\ElectricRoomMine.aspx.designer.cs">
-      <DependentUpon>ElectricRoomMine.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="UI_RealtimeBYC_BYF\ElectricRoomCementMix.aspx.cs">
-      <DependentUpon>ElectricRoomCementMix.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="UI_RealtimeBYC_BYF\ElectricRoomCementMix.aspx.designer.cs">
-      <DependentUpon>ElectricRoomCementMix.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="UI_RealtimeBYC_BYF\ElectricRoomCoalMill.aspx.cs">
-      <DependentUpon>ElectricRoomCoalMill.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="UI_RealtimeBYC_BYF\ElectricRoomCoalMill.aspx.designer.cs">
-      <DependentUpon>ElectricRoomCoalMill.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="UI_RealtimeBYC_BYF\ElectricRoomKilnTail.aspx.cs">
-      <DependentUpon>ElectricRoomKilnTail.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="UI_RealtimeBYC_BYF\ElectricRoomKilnTail.aspx.designer.cs">
-      <DependentUpon>ElectricRoomKilnTail.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="UI_RealtimeBYC_BYF\ElectricRoomPackaging.aspx.cs">
-      <DependentUpon>ElectricRoomPackaging.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="UI_RealtimeBYC_BYF\ElectricRoomPackaging.aspx.designer.cs">
-      <DependentUpon>ElectricRoomPackaging.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="UI_RealtimeBYC_BYF\ElectricRoomPowerGeneration.aspx.cs">
-      <DependentUpon>ElectricRoomPowerGeneration.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="UI_RealtimeBYC_BYF\ElectricRoomPowerGeneration.aspx.designer.cs">
-      <DependentUpon>ElectricRoomPowerGeneration.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="UI_RealtimeBYC_BYF\ElectricRoomRawMaterialMill.aspx.cs">
-      <DependentUpon>ElectricRoomRawMaterialMill.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="UI_RealtimeBYC_BYF\ElectricRoomRawMaterialMill.aspx.designer.cs">
-      <DependentUpon>ElectricRoomRawMaterialMill.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="UI_RealtimeBYC_BYF\ElectricRoomRawMaterialMix.aspx.cs">
-      <DependentUpon>ElectricRoomRawMaterialMix.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="UI_RealtimeBYC_BYF\ElectricRoomRawMaterialMix.aspx.designer.cs">
-      <DependentUpon>ElectricRoomRawMaterialMix.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="UI_RealtimeBYC_BYF\Others.aspx.cs">
-      <DependentUpon>Others.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="UI_RealtimeBYC_BYF\Others.aspx.designer.cs">
-      <DependentUpon>Others.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="UI_RealtimeBYC_BYF\SubstationKilnHead.aspx.cs">
-      <DependentUpon>SubstationKilnHead.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="UI_RealtimeBYC_BYF\SubstationKilnHead.aspx.designer.cs">
-      <DependentUpon>SubstationKilnHead.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="UI_RealtimeBYC_BYF\SubstationTotalStepdown.aspx.cs">
-      <DependentUpon>SubstationTotalStepdown.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="UI_RealtimeBYC_BYF\SubstationTotalStepdown.aspx.designer.cs">
-      <DependentUpon>SubstationTotalStepdown.aspx</DependentUpon>
+    <Compile Include="UI_RealtimeBYC_BYF\AmmeterMonitor.aspx.designer.cs">
+      <DependentUpon>AmmeterMonitor.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

@@ -18,6 +18,6 @@ namespace RealtimeBY.Infrastructure.Configuration
         // 现场
         //private static string _connString = "Data Source=Lenovo-PC;Initial Catalog=NXJC_DEVELOP;User Id=sa;Password=jsh123+";
 
-        public static string NXJCConnectionString { get { return ConfigurationManager.ConnectionStrings["Conn"].ToString(); } }
+        public static string NXJCConnectionString { get { return ConfigurationManager.ConnectionStrings["ConnNXJC"].ToString(); } }
     }
 }

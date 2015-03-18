@@ -7,27 +7,18 @@
 // </自动生成>
 //------------------------------------------------------------------------------
 
-namespace RealtimeBY.Web.UI_RealtimeBYC_BYF {
+namespace WebUserContorls.Web.UI_WebUserControls.OrganizationSelector {
     
     
-    public partial class ElectricRoomRawMaterialMix {
+    public partial class OrganisationTree {
         
         /// <summary>
-        /// Head1 控件。
+        /// HiddenField_PageName 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlHead Head1;
-        
-        /// <summary>
-        /// form1 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText HiddenField_PageName;
     }
 }
