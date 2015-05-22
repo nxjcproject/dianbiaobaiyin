@@ -51,6 +51,13 @@ function setupTimerToPollLatestData() {
 // 显示数据项
 function displayValue(json) {
     for (var pair in json) {
-        $("#" + pair).val(json[pair]);
+        //电能保留整数
+        if (pair.indexOf("Energy") > 0) {
+            $("#" + pair).val(parseInt(json[pair]));
+        }
+        //功率保留两位小数
+        if (pair.indexOf("Power") > 0) {
+            $("#" + pair).val(parseFloat(json[pair]).toFixed(2));
+        }
     }
 }

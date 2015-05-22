@@ -33,7 +33,7 @@
                                 <input id="productLineName" class="easyui-textbox" style="width: 180px;" readonly="true" /><input id="organizationId" readonly="true" style="display: none;" /></td>
                             <td>选择电气室：</td>
                             <td>
-                                <input id="electricRoomId" class="easyui-combobox" />
+                                <input id="electricRoomId" class="easyui-combobox" data-options="panelHeight:'auto'"/>
                             </td>
                             <td><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true"
                                 onclick="QueryReportFun();">查询</a>
