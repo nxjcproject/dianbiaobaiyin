@@ -50,12 +50,13 @@
                 <%--<div  id="myContainerId" ></div>--%>
                 <%--</div>--%>
                 <div data-options="region:'center'" style="padding: 5px;">
-                    <div id="wrapper" class="easyui-panel" style="height: auto; padding: 2px; display: none">
-                        <div id="myContainerId" title="配电室" class="easyui-panel" style="width: 100%; height: auto; padding: 10px;">
-                        </div>
+                    <div id="wrapper" class="easyui-panel" data-options="fit:true" style="height: auto; padding: 2px; display: none">
+                        <%--<div id="myContainerId" title="配电室" class="easyui-panel" style="width: 100%; height: auto; padding: 10px;">
+                        </div>--%>
                     </div>
                 </div>
             </div>
         </div>
+        <a id="tooltip" href="javascript:void(0)"></a>
 </body>
 </html>

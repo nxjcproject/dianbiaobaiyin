@@ -11,10 +11,27 @@ namespace RealtimeBY.Service
 {
     public static class AutoCreatHtmlStrSrevice
     {
+        //TODO:效率问题有待优化
         static public string GetHtml(string organizationId,string electricRoomName)
         {
-            DataTable sourceTable = GetTableByElectricRoom(organizationId,electricRoomName);
-            return ToHtmlStrByTable(sourceTable,electricRoomName);
+            if (electricRoomName == "")
+            {
+                DataTable electricRoomTable = AmmetersService.GetElectricRoom(organizationId);
+                StringBuilder build = new StringBuilder();
+                foreach (DataRow dr in electricRoomTable.Rows)
+                {
+                    string t_electricRoomName = dr["ElectricRoom"].ToString().Trim();
+                    DataTable t_sourceTable = GetTableByElectricRoom(organizationId, t_electricRoomName);
+                    build.Append(PanelHtmlStr(t_sourceTable, t_electricRoomName));
+                }
+                return build.ToString();
+            }
+            else
+            {
+                DataTable sourceTable = GetTableByElectricRoom(organizationId, electricRoomName);
+                //return ToHtmlStrByTable(sourceTable,electricRoomName);
+                return PanelHtmlStr(sourceTable, electricRoomName);
+            }
         }
         /// <summary>
         /// 获取电表对照表的内容
@@ -26,7 +43,7 @@ namespace RealtimeBY.Service
             string managementDatabaseName = GetMeterDatabaseByOrganizationId.GetMeterDatabaseName(organizationId);
             string connectionstring = ConnectionStringFactory.NXJCConnectionString;
             SqlServerDataFactory _dataFactory = new SqlServerDataFactory(connectionstring);
-            string sqlStr = @"SELECT A.AmmeterName,A.AmmeterNumber,A.CT,A.PT
+            string sqlStr = @"SELECT A.AmmeterName,A.AmmeterNumber,A.CT,A.PT,A.AmmeterAddress,A.Status
                                 FROM [{0}].[dbo].AmmeterContrast AS A
                                 WHERE A.ElectricRoom=@ElectricRoom"
                             ;
@@ -34,6 +51,22 @@ namespace RealtimeBY.Service
             SqlParameter paramater = new SqlParameter("ElectricRoom", electricRoomName);
             return _dataFactory.Query(string.Format(sqlStr, managementDatabaseName), paramater);
         }
+        /// <summary>
+        /// 增加easyui-panel的Html
+        /// </summary>
+        /// <param name="sourceTable"></param>
+        /// <param name="electricRoom"></param>
+        /// <returns></returns>
+        static private string PanelHtmlStr(DataTable sourceTable, string electricRoom)
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            string panel = string.Format("<div title=\"{0}\" class=\"easyui-panel\"  style=\"height: auto; padding: 10px;\">",electricRoom);
+            stringBuilder.Append(panel);
+            stringBuilder.Append(ToHtmlStrByTable(sourceTable, electricRoom));
+            stringBuilder.Append("</div>");
+            return stringBuilder.ToString();
+        }
+
         /// <summary>
         /// 转换为HTML（根据电气室的table）
         /// </summary>
@@ -62,13 +95,14 @@ namespace RealtimeBY.Service
                 DataRow  nowRow=sourceTable.Rows[i];
                 if (i % 5 == 0)
                 {
-                    mBaseBuilder.Append("<div style=\"width:980px;\"><table>");
+                    mBaseBuilder.Append("<div ><table>");
                     ammeterName.Append("<tr style=\"height:23px;\"><td style=\"width:60px;\">电表名称</td>");
                     ratio.Append("<tr><td>变比</td>");
                     energy.Append("<tr><td>电能</td>");
                     power.Append("<tr><td>功率</td>");
+
                 }
-                ammeterName.Append("<td>" + nowRow["AmmeterName"].ToString().Trim() + "</td>");
+                ammeterName.Append("<td class=\"ammeterName\" data-ammeterStatus=\"" + nowRow["Status"].ToString().Trim() + "\" data-ammeterNum=\"" + nowRow["AmmeterNumber"].ToString().Trim() + "\" data-ammeterAddr=\"" + nowRow["AmmeterAddress"].ToString().Trim() + "\">" + nowRow["AmmeterName"].ToString().Trim() + "</td>");
                 ratio.Append("<td><input type=\"text\" value=\"CT:"+nowRow["CT"].ToString().Trim()+" PT:"+nowRow["PT"].ToString().Trim()+"\" readonly=\"readonly\" /></td>");
                 energy.Append("<td><input id=\""+nowRow["AmmeterNumber"].ToString().Trim()+"Energy\" type=\"text\" readonly=\"readonly\" /></td>");
                 power.Append("<td><input id=\"" + nowRow["AmmeterNumber"].ToString().Trim() + "Power\" type=\"text\" readonly=\"readonly\" /></td>");
