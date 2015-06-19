@@ -2,7 +2,7 @@
 
 $(document).ready(function () {
     initOrganizationTree();
-    initTooltip();
+    //initTooltip();
     
 })
 
@@ -44,6 +44,7 @@ function queryAmmeter(node) {
         data: '{organizationId: "' + organizationId + '",electricRoomName:"' + electricRoom + '",levelType:"'+levelType+'"}',
         contentType: "application/json; charset=utf-8",
         dataType: "json",
+        async:false,
         success: function (msg) {
             var mHtml = msg.d;
             //$('#myContainerId').empty();
@@ -58,7 +59,7 @@ function queryAmmeter(node) {
             }
         }
     });
-    setTimeout('bindEvent()', 2000);
+    bindEvent();
 }
 
 function onOrganisationTreeClick(node) {
@@ -123,26 +124,32 @@ function bindEvent() {
         var ammeterStatus = $(this).attr('data-ammeterStatus');
         //alert("ammeterNum:" + ammeterNum + ",ammeterAddr:" + ammeterAddr);
         var myContent = "编号:" + ammeterNum + ",表地址:" + ammeterAddr + ",状态:" + ammeterStatus;
-        $('#tooltip').tooltip({
-            deltaX: e.pageX,
-            deltaY: e.pageY,
+        $(this).tooltip({
+            //deltaX: e.pageX,
+            //deltaY: e.pageY,
+            position:'top',
+            onShow: function () {
+                $(this).tooltip('tip').css({
+                    backgroundColor: '#C4C4C4',
+                    borderColor: '#C4C4C4'
+                })},
             content:myContent
         });
-        $('#tooltip').tooltip('show');
+        $(this).tooltip('show');
     })
     $('.ammeterName').mouseleave(function (e) {
-        $('#tooltip').tooltip('hide');
+        $(this).tooltip('hide');
     })
 }
 
-function initTooltip() {
-    $('#tooltip').tooltip({
-        position: 'right',
-        onShow: function () {
-            $(this).tooltip('tip').css({
-                backgroundColor: '#C4C4C4',
-                borderColor: '#C4C4C4'
-            });
-        }
-    });
-}
+//function initTooltip() {
+//    $('#tooltip').tooltip({
+//        position: 'right',
+//        onShow: function () {
+//            $(this).tooltip('tip').css({
+//                backgroundColor: '#C4C4C4',
+//                borderColor: '#C4C4C4'
+//            });
+//        }
+//    });
+//}
