@@ -58,5 +58,6 @@
             </div>
         </div>
         <a id="tooltip" href="javascript:void(0)"></a>
+        </div>
 </body>
 </html>

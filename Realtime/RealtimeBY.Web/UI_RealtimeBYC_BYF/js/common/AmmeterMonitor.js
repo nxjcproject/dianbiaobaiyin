@@ -122,8 +122,12 @@ function bindEvent() {
         var ammeterNum = $(this).attr('data-ammeterNum');
         var ammeterAddr = $(this).attr('data-ammeterAddr');
         var ammeterStatus = $(this).attr('data-ammeterStatus');
+        var timeStatusChange = $(this).attr('data-timeStatusChange');
         //alert("ammeterNum:" + ammeterNum + ",ammeterAddr:" + ammeterAddr);
         var myContent = "编号:" + ammeterNum + ",表地址:" + ammeterAddr + ",状态:" + ammeterStatus;
+        if (ammeterStatus != '正常读取') {
+            myContent = myContent + "(故障开始时间:" + timeStatusChange+")";
+        }
         $(this).tooltip({
             //deltaX: e.pageX,
             //deltaY: e.pageY,

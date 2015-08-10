@@ -43,7 +43,7 @@ namespace RealtimeBY.Service
             string managementDatabaseName = GetMeterDatabaseByOrganizationId.GetMeterDatabaseName(organizationId);
             string connectionstring = ConnectionStringFactory.NXJCConnectionString;
             SqlServerDataFactory _dataFactory = new SqlServerDataFactory(connectionstring);
-            string sqlStr = @"SELECT A.AmmeterName,A.AmmeterNumber,A.CT,A.PT,A.AmmeterAddress,A.Status
+            string sqlStr = @"SELECT A.AmmeterName,A.AmmeterNumber,A.CT,A.PT,A.AmmeterAddress,A.Status,A.TimeStatusChange
                                 FROM [{0}].[dbo].AmmeterContrast AS A
                                 WHERE A.ElectricRoom=@ElectricRoom"
                             ;
@@ -102,7 +102,14 @@ namespace RealtimeBY.Service
                     power.Append("<tr><td>功率</td>");
 
                 }
-                ammeterName.Append("<td class=\"ammeterName\" data-ammeterStatus=\"" + nowRow["Status"].ToString().Trim() + "\" data-ammeterNum=\"" + nowRow["AmmeterNumber"].ToString().Trim() + "\" data-ammeterAddr=\"" + nowRow["AmmeterAddress"].ToString().Trim() + "\">" + nowRow["AmmeterName"].ToString().Trim() + "</td>");
+                string ammeterStyle = "";
+                if (nowRow["Status"].ToString().Trim() != "正常读取")
+                {
+                    ammeterStyle = " style=\"color:red\"";
+                }
+                ammeterName.Append("<td" + ammeterStyle + " class=\"ammeterName\" data-ammeterStatus=\"" + nowRow["Status"].ToString().Trim() + "\" data-ammeterNum=\"" +
+                    nowRow["AmmeterNumber"].ToString().Trim() + "\" data-ammeterAddr=\"" + nowRow["AmmeterAddress"].ToString().Trim() + "\" data-timeStatusChange=\"" +
+                    nowRow["TimeStatusChange"].ToString().Trim() + "\">" + nowRow["AmmeterName"].ToString().Trim() + "</td>");
                 ratio.Append("<td><input type=\"text\" value=\"CT:"+nowRow["CT"].ToString().Trim()+" PT:"+nowRow["PT"].ToString().Trim()+"\" readonly=\"readonly\" /></td>");
                 energy.Append("<td><input id=\""+nowRow["AmmeterNumber"].ToString().Trim()+"Energy\" type=\"text\" readonly=\"readonly\" /></td>");
                 power.Append("<td><input id=\"" + nowRow["AmmeterNumber"].ToString().Trim() + "Power\" type=\"text\" readonly=\"readonly\" /></td>");
